@@ -29,6 +29,14 @@ service zabbix-agent restart
 and then just add the template on the web interface and assign the template to a host.
 The template contains only basic facts, but could be extended with any, ( custom facts, aws specific etc )
 
+Useing it with [dj-wasabi/puppet-zabbix](https://github.com/dj-wasabi/puppet-zabbix) puppet module in hieradata.
+
+```ỳaml
+zabbix::userparameter::data:
+  facter:
+    content: 'UserParameter=facter[*],/usr/bin/facter $1'
+```
+
 ## Notes
 No sudo added so fact require root privileges like productname or serialnumber  will fail, if you need those setup a sudo line for facter, and change the conf.
 
